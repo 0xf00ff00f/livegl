@@ -6,13 +6,13 @@
 "
 
 " load liveclient extension
-pyfile ~/.vim/python/liveclient.py
+py3file ~/.vim/python/liveclient.py
 
-command! -nargs=0 SendVertShader :python  liveclient.send_shader("shader_vp")
-command! -nargs=0 SendFragShader :python  liveclient.send_shader("shader_fp")
-command! -nargs=0 PauseShader    :python  liveclient.pause_shader()
-command! -nargs=0 ResumeShader   :python  liveclient.resume_shader()
-command! -nargs=0 ToggleShader   :python  liveclient.toggle_shader()
+command! -nargs=0 SendVertShader :python3  liveclient.send_shader("shader_vp")
+command! -nargs=0 SendFragShader :python3  liveclient.send_shader("shader_fp")
+command! -nargs=0 PauseShader    :python3  liveclient.pause_shader()
+command! -nargs=0 ResumeShader   :python3  liveclient.resume_shader()
+command! -nargs=0 ToggleShader   :python3  liveclient.toggle_shader()
     
 nmap <leader>g :ToggleShader<cr>
 

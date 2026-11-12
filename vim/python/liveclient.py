@@ -14,7 +14,7 @@ class LiveClient:
         self.t = time.time()
         self.active = True
 
-        self.requireRegex = re.compile('^//\s*require\s+"([\w,./]+)"\s*$',re.MULTILINE)
+        self.requireRegex = re.compile('^//\\s*require\\s+"([\\w,./]+)"\\s*$',re.MULTILINE)
 
     def send_shader(self,shader_type):
 
@@ -28,7 +28,7 @@ class LiveClient:
             try:
                 self.socket.send_json(msg,zmq.NOBLOCK)
             except zmq.ZMQError:
-                print "Server not ready"
+                print("Server not ready")
 
         self.t = now
      
@@ -41,7 +41,7 @@ class LiveClient:
             try:
                 self.socket.send_json(msg,zmq.NOBLOCK)
             except zmq.ZMQError:
-                print "Server not ready"
+                print("Server not ready")
 
         
         self.active = False
@@ -57,7 +57,7 @@ class LiveClient:
             try:
                 self.socket.send_json(msg,zmq.NOBLOCK)
             except zmq.ZMQError:
-                print "Server not ready"
+                print("Server not ready")
 
         self.active = True
         self.t = now
@@ -73,11 +73,12 @@ class LiveClient:
 
         def match_function(match):
             filename = match.group(1)
+
             try:
-                f = file(filename)
-                return f.read()
+                with open(filename, 'r') as f:
+                    return f.read()
             except:
-                print 'Could not open file: '+filename
+                print(f'Could not open file: {filename}')
                 return ""
 
         return self.requireRegex.sub(match_function,src)
